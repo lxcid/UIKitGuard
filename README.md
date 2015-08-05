@@ -1,1 +1,1 @@
-# PSPDFUIKitMainThreadGuard.m
+# UIKitGuard
