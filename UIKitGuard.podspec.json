@@ -13,7 +13,7 @@
   },
   "source" : {
     "git" : "https://github.com/lxcid/UIKitGuard.git",
-    "branch" : "master"
+    "tag" : "0.0.1"
   },
   "source_files" : "PSPDFUIKitMainThreadGuard.m"
 }
