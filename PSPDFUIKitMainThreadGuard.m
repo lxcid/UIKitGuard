@@ -14,6 +14,13 @@
 #define PROPERTY(propName) @#propName
 #endif
 
+#define PSPDFAssert(expression, ...) \
+do { if(!(expression)) { \
+NSLog(@"%@", [NSString stringWithFormat: @"Assertion failure: %s in %s on line %s:%d. %@", #expression, __PRETTY_FUNCTION__, __FILE__, __LINE__, [NSString stringWithFormat:@"" __VA_ARGS__]]); \
+abort(); }} while(0)
+
+#define PSPDFLogError NSLog
+
 // http://www.mikeash.com/pyblog/friday-qa-2010-01-29-method-replacement-for-fun-and-profit.html
 BOOL PSPDFReplaceMethodWithBlock(Class c, SEL origSEL, SEL newSEL, id block) {
     PSPDFAssert(c && origSEL && newSEL && block);
@@ -42,11 +49,6 @@ BOOL PSPDFReplaceMethodWithBlock(Class c, SEL origSEL, SEL newSEL, id block) {
 SEL _PSPDFPrefixedSelector(SEL selector) {
     return NSSelectorFromString([NSString stringWithFormat:@"pspdf_%@", NSStringFromSelector(selector)]);
 }
-
-#define PSPDFAssert(expression, ...) \
-do { if(!(expression)) { \
-NSLog(@"%@", [NSString stringWithFormat: @"Assertion failure: %s in %s on line %s:%d. %@", #expression, __PRETTY_FUNCTION__, __FILE__, __LINE__, [NSString stringWithFormat:@"" __VA_ARGS__]]); \
-abort(); }} while(0)
 
 void PSPDFAssertIfNotMainThread(void) {
     PSPDFAssert(NSThread.isMainThread, @"\nERROR: All calls to UIKit need to happen on the main thread. You have a bug in your code. Use dispatch_async(dispatch_get_main_queue(), ^{ ... }); if you're unsure what thread you're in.\n\nBreak on PSPDFAssertIfNotMainThread to find out where.\n\nStacktrace: %@", NSThread.callStackSymbols);
