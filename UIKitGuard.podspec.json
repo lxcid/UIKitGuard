@@ -1,0 +1,19 @@
+{
+  "name" : "UIKitGuard",
+  "version" : "0.0.1",
+  "summary" : "Guard against accessing UIKit on threads other than main.",
+  "description" : "This is a guard that tracks down UIKit access on threads other than main. This snippet is taken from the commercial iOS PDF framework http://pspdfkit.com, but relicensed under MIT. Works because a lot of calls internally call setNeedsDisplay or setNeedsLayout. Won't catch everything, but it's very lightweight and usually does the job.",
+  "homepage" : "https://github.com/lxcid/UIKitGuard",
+  "authors" : {
+    "Peter Steinberger" : "steipete@gmail.com"
+  },
+  "license" : "MIT",
+  "platforms" : {
+    "ios" : "7.0"
+  },
+  "source" : {
+    "git" : "https://github.com/lxcid/UIKitGuard.git",
+    "branch" : "master"
+  },
+  "source_files" : "PSPDFUIKitMainThreadGuard.m"
+}
